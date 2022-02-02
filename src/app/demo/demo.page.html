@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>demo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-button (click)="t101Command()">t101Command</ion-button>
+  </div>
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="result">
+    <div>Result</div>
+    <div>{{result| json}}</div>
+  </div>
+  <div *ngIf="error">
+    <div>Error</div>
+    <div>{{result| json}}</div>
+  </div>
+</ion-content>
