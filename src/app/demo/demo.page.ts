@@ -1,42 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { T101Request } from '../models/t101';
-import { ApiVService } from '../services/api-service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.page.html',
   styleUrls: ['./demo.page.scss'],
 })
-export class DemoPage implements OnInit {
+export class DemoPage {
   result: any;
   error: any;
   loading = false;
 
-  constructor(private _api: ApiVService) {}
-
-  ngOnInit() {}
+  constructor(private _httpClient: HttpClient) {}
 
   t101Command() {
     this.loading = true;
     this.result = null;
     this.error = null;
     const command = this._getCommand('T101');
-    this._api.t101Command(command).subscribe(
-      (res) => {
-        this.result = res;
-      },
-      (err) => {
-        this.loading = false;
-        this.error = err;
-      },
-      () => {
-        this.loading = false;
-      }
-    );
+    console.log(JSON.stringify(command));
+
+    this._httpClient
+      .post('https://api-tax.turbopos.net/api/TaxEndpoint/ug/command', {
+        command: JSON.stringify(command),
+      })
+      .subscribe(
+        (res) => {
+          this.result = res;
+          this.loading = false;
+        },
+        (err) => {
+          console.log(err);
+          this.loading = false;
+        }
+      );
   }
 
   private _getCommand(commandName: string): T101Request {
     const command = new T101Request();
+
+    command.data = {
+      signature: '',
+      dataDescription: {
+        codeType: 0,
+        encryptCode: 0,
+        zipCode: 0,
+      },
+    };
 
     command.globalInfo = {
       appId: 'AP01',
@@ -56,6 +67,11 @@ export class DemoPage implements OnInit {
       responseDateFormat: 'dd/MM/yyyy',
       responseTimeFormat: 'dd/MM/yyyy HH:mm:ss',
       referenceNo: '21PL010020807',
+    };
+
+    command.returnStateInfo = {
+      returnCode: '',
+      returnMessage: '',
     };
     return command;
   }

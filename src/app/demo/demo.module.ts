@@ -7,14 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { DemoPageRoutingModule } from './demo-routing.module';
 
 import { DemoPage } from './demo.page';
+import { HTTP } from '@ionic-native/http/ngx';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DemoPageRoutingModule
-  ],
-  declarations: [DemoPage]
+  imports: [CommonModule, FormsModule, IonicModule, DemoPageRoutingModule],
+  declarations: [DemoPage],
+  providers: [HTTP],
 })
 export class DemoPageModule {}
