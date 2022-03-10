@@ -7,8 +7,13 @@
 <ion-content>
   <div>
     <ion-button (click)="t101Command()">t101Command</ion-button>
+    <ion-button (click)="t102Command()">t102Command</ion-button>
   </div>
   <div *ngIf="loading">Loading...</div>
+  <div *ngIf="result">
+    <div>Content</div>
+    <div>{{content}}</div>
+  </div>
   <div *ngIf="result">
     <div>Result</div>
     <div>{{result| json}}</div>

@@ -1,10 +1,10 @@
-export class T101Request {
+export class RequestObject {
   data: DataModel;
   globalInfo: GlobalInfoModel;
   returnStateInfo: ReturnStateInfoModel;
 }
 
-export interface T101Response {
+export interface ResponseObject {
   data: DataModel;
   globalInfo: GlobalInfoModel;
   returnStateInfo: ReturnStateInfoModel;
