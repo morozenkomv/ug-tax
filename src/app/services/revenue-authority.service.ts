@@ -26,6 +26,11 @@ export class RevenueAuthorityService {
     return this._sendCommand(to101Command);
   }
 
+  t103Command() {
+    const to103Command = this._getRequestObject('T103');
+    return this._sendCommand(to103Command);
+  }
+
   private _sendCommand(request: RequestObject): Observable<ResponseObject> {
     const requestData = JSON.stringify(request);
     return this._httpClient.post<ResponseObject>(this._baseUrl, {

@@ -24,6 +24,10 @@ export class DemoPage {
     this._executeCommand(this._revenueAuthorityService.t102Command());
   }
 
+  t103Command() {
+    this._executeCommand(this._revenueAuthorityService.t103Command());
+  }
+
   private _executeCommand(command: Observable<ResponseObject>) {
     this.loading = true;
     this.result = null;
@@ -32,6 +36,7 @@ export class DemoPage {
 
     command.subscribe(
       (res) => {
+        console.log(res);
         this.result = res;
         if (res.data.content) {
           this.content = window.atob(res.data.content);
